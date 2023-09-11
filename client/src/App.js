@@ -1,6 +1,7 @@
 import './App.css';
 import React, {useState} from 'react';
 import TableComp from './blocks/TableComp';
+import FormNewContact from './components/FormNewContact';
 
 function App() {
 
@@ -12,8 +13,8 @@ function App() {
     ]
   )
 
-  const appendContact = () => {    
-    const newContact = {id: 7, fullName: " FIO 7", phone: "+7 123 456 78 97", note: "note 7"};
+  const appendContact = (fullName, phone, note) => {    
+    const newContact = {id: contacts.length + 1, fullName: fullName, phone: phone, note: note};
     setContacts([...contacts, newContact]);
   }
 
@@ -25,14 +26,7 @@ function App() {
         </div>
         <div className='card-body'>
           <TableComp data={contacts} />
-          <div>
-          <button
-            type='button'
-            className='btn btn-primary'
-            onClick={appendContact}>
-            Добавить контакт
-          </button>
-        </div>
+          <FormNewContact appendContact={appendContact}/>
         </div>                
       </div>
     </div>
