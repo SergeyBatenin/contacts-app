@@ -1,5 +1,5 @@
 import React from 'react';
-import TableRow from '../components/TableRow';
+import TableRow from '../components/TableRow/TableRow';
 
 const TableComp = (props) => {
     return (
@@ -10,12 +10,13 @@ const TableComp = (props) => {
             <th scope='col'>Фамилия Имя Отчество</th>
             <th scope='col'>Номер телефона</th>
             <th scope='col'>Заметка</th>
+            <th scope='col'></th>
           </tr>
         </thead>
         <tbody>
             {
               props.data.map(item => (
-                <TableRow contact={item}/>
+                <TableRow contact={item} key={item.id} removeContact={props.removeContact}/>
               ))
             }
         </tbody>

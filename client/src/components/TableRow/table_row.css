@@ -1,0 +1,17 @@
+.close-btn {
+    width: 26px;
+    visibility: hidden;
+}
+
+.contact-row:hover {
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    background-color: darkgrey !important;
+}
+
+.contact-row:hover .close-btn {
+    visibility: visible;
+    cursor: pointer;
+}
