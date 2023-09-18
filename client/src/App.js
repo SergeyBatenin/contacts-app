@@ -1,17 +1,28 @@
 import './App.css';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import TableComp from './blocks/TableComp';
 import FormNewContact from './components/FormNewContact';
+import axios from 'axios';
 
 function App() {
 
-  const [contacts, setContacts] = useState(
-    [
-      {id: 1, fullName: " FIO 1", phone: "+7 123 456 78 91", note: "note 1"},
-      {id: 2, fullName: " FIO 2", phone: "+7 123 456 78 92", note: "note 2"},
-      {id: 3, fullName: " FIO 3", phone: "+7 123 456 78 93", note: "note 3"}
-    ]
-  )
+  const [contacts, setContacts] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/contacts')
+        .then(res => {
+          const data = [];
+
+          res.data._embedded.contacts.forEach(contact => {
+            data.push({
+              fullName: contact.fullName,
+              phone: contact.phone,
+              note: contact.note
+            })
+          });
+          setContacts(data);
+        })
+  }, []);
+  
 
   const appendContact = (fullName, phone, note) => {    
     
