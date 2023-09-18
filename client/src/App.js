@@ -5,15 +5,17 @@ import FormNewContact from './components/FormNewContact';
 import axios from 'axios';
 
 function App() {
+  const BASE_URL = 'http://localhost:8080/api/contacts';
 
   const [contacts, setContacts] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:8080/api/contacts')
+    axios.get(BASE_URL)
         .then(res => {
           const data = [];
 
           res.data._embedded.contacts.forEach(contact => {
             data.push({
+              id: contact.id,
               fullName: contact.fullName,
               phone: contact.phone,
               note: contact.note
@@ -26,20 +28,32 @@ function App() {
 
   const appendContact = (fullName, phone, note) => {    
     
-    const length = contacts.length;
-    let currentId = 0;
+    // const length = contacts.length;
+    // let currentId = 0;
 
-    if (length === 0) {
-      currentId = 1;
-    } else {
-      currentId = contacts[length - 1].id + 1;
-    }
+    // if (length === 0) {
+    //   currentId = 1;
+    // } else {
+    //   currentId = contacts[length - 1].id + 1;
+    // }
 
-    const newContact = {id: currentId, fullName: fullName, phone: phone, note: note};
-    setContacts([...contacts, newContact]);
+    const newContact = {
+      // id: currentId, 
+      fullName: fullName, 
+      phone: phone, 
+      note: note
+    };
+
+    axios.post(BASE_URL, newContact)
+    .then(res => {
+      newContact.id = res.data.id;
+      setContacts([...contacts, newContact]);
+    });
   }
 
   const removeContact = (id) => {
+    const url = `${BASE_URL}/${id}`;
+    axios.delete(url);
     setContacts(contacts.filter(contact => contact.id !== id));
   }
 
