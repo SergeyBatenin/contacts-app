@@ -6,7 +6,7 @@ const TableRow = (props) => {
     const {id, fullName, phone, note} = props.contact;
     return (
         <tr className='contact-row'>
-            <th scope='row'>{id}</th>
+            <th scope='row'>{props.position + 1}</th>
             <td className='contact-fullname'>{fullName}</td>
             <td className='contact-phone'>{phone}</td>
             <td className='contact-note'>{note}</td>

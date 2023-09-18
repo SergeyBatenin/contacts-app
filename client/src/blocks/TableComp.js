@@ -15,8 +15,8 @@ const TableComp = (props) => {
         </thead>
         <tbody>
             {
-              props.data.map(item => (
-                <TableRow contact={item} key={item.id} removeContact={props.removeContact}/>
+              props.data.map((item, index) => (
+                <TableRow contact={item} position = {index} key={item.id} removeContact={props.removeContact}/>
               ))
             }
         </tbody>

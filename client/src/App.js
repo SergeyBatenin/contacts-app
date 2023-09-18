@@ -26,19 +26,9 @@ function App() {
   }, []);
   
 
-  const appendContact = (fullName, phone, note) => {    
-    
-    // const length = contacts.length;
-    // let currentId = 0;
-
-    // if (length === 0) {
-    //   currentId = 1;
-    // } else {
-    //   currentId = contacts[length - 1].id + 1;
-    // }
+  const appendContact = (fullName, phone, note) => {
 
     const newContact = {
-      // id: currentId, 
       fullName: fullName, 
       phone: phone, 
       note: note
